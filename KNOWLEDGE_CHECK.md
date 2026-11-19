@@ -8,7 +8,7 @@ Assume you want to share your image with others and make it publicly available o
 
 **Your answer:** Give two reasons why this is a bad idea. Think of who could then read your credentials, and of what happens when your Learner Lab session ends.
 
-...
+This is a privacy concern and could compromise the security of your aws credentials. The Credentials also get reset when the Learner Lab session ends, so it would not ultimately be effecient. 
 
 ## 2. Where did the Atlas password come from?
 
@@ -17,13 +17,14 @@ In Step 4, you ran the analysis once with `-v ~/.aws:/home/app/.aws:ro` only, wi
 *Hint:* Read `get_atlas_settings()` in `src/book_analysis/analyze.py`.
 
 **Your answer:** Explain, step by step, where the container found the Atlas settings in that run.
+It finds them in the function get_atlas_settings() in analyze.py. If the enviornment variables are set, it gets them from os.enviorn. Otherwise, it gets them from the SSM parameter in aws.
 
-...
 
 ## 3. Same tag, different image
 
 Run `docker images book-analysis`, and note the image ID of `book-analysis:0.1.0`. Then change the `description` in the `LABEL` of your `Dockerfile`, build again with the same command, `docker build -t book-analysis:0.1.0 .`, and run `docker images book-analysis` again.
 
 **Your answer:** Paste the image ID from before and after the rebuild. Why is it a problem for someone who uses your image that `0.1.0` now names a different image, and what should you have done instead?
-
-...
+ba923effb5e0
+2b5357461740
+The difference in name would cause issues in tracking or referring to the image. I should have changed it from '0.1.0'.
